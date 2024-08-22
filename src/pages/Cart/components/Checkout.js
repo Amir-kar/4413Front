@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useCart } from "../../../context/cartContext"
 import { useNavigate } from "react-router-dom";
 import { createOrder, getUser, logout } from "../../../services";
-import { toast } from "react-toastify";
+import { handleError } from "../../../components/errorHandle/handleError";
 
 export const Checkout = ({ setCheckout }) => {
     const { cartList, total, clearCart } = useCart();
@@ -23,14 +23,8 @@ export const Checkout = ({ setCheckout }) => {
                 console.log("yesafsdf");
             }catch(error){
             //error.message.toUpperCase()
-                if(error.status ==401){
-                    toast.error("Session Expired. Please log in again");
-                }
-                else{
-                    toast.error(error.message);
-                }
+                handleError(error);
                 clearCart();
-                logout();
                 navigate('/login');
         }};
         fetchData();

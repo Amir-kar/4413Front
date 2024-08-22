@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { DashbaordEmpty } from "./components/DashboardEmpty";
 import { DashbaordList } from "./components/DashboardList";
-import { getUserOrders, logout } from "../../services";
+import { getUserOrders} from "../../services";
 import { useTitle } from "../../hooks/useTitle";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/cartContext";
+import { handleError } from "../../components/errorHandle/handleError";
 
 export const Dashboard = () => {
   const {clearCart } = useCart();
@@ -22,14 +22,8 @@ export const Dashboard = () => {
         console.log(data);
       }
       catch(error){
-        if(error.status ==401){
-          toast.error("Session Expired. Please log in again");
-        }
-        else{
-          toast.error(error.message);
-        }
+        handleError(error);
         clearCart();
-        logout();
         navigate('/login');
       }
       

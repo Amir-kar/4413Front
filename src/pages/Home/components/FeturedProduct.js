@@ -6,6 +6,7 @@ export const FeaturedProduct = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    document.documentElement.classList.add("dark");
     async function fetchProducts() {
       try {
         const data = await getFeturedList();

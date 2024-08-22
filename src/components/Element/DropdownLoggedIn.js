@@ -16,7 +16,7 @@ export const DropdownLoggedIn = ({setDropdown}) => {
             
             setUser(data)
             }catch(error){
-                if(error.status ==401){
+                if(error.status ===401){
                     toast.error("Session Expired. Please log in again");
                 }
                 else{
