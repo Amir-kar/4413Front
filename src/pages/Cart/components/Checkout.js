@@ -3,6 +3,7 @@ import { useCart } from "../../../context/cartContext"
 import { useNavigate } from "react-router-dom";
 import { createOrder, getUser, logout } from "../../../services";
 import { handleError } from "../../../components/errorHandle/handleError";
+import { toast } from "react-toastify";
 
 export const Checkout = ({ setCheckout }) => {
     const { cartList, total, clearCart } = useCart();
@@ -41,6 +42,10 @@ export const Checkout = ({ setCheckout }) => {
             clearCart();
             navigate("/order", { state: { data: data, status: true } });
         } catch (error) {
+            if(error.status===400){
+                toast.error(error.message);
+            }
+            
             navigate("/order", { state: { status: false } });
         }
     }
@@ -105,7 +110,7 @@ export const Checkout = ({ setCheckout }) => {
                                 </div>
                                 <div>
                                     <label htmlFor="code" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >Security Code:</label>
-                                    <input type="number" name="code" id="code" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={wallet?.cvv || ''} onChange={e=>handleChangeValues({cvv:e.target.value})}  readOnly={allowChange} required />
+                                    <input type="number" name="code" id="code" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={wallet?.cvv || null} onChange={e=>handleChangeValues({cvv:e.target.value})}  readOnly={allowChange} required />
                                 </div>
                                 <div>
                                     <input id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={e=>handleChangeAllow()} />
