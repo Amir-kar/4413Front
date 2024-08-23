@@ -7,6 +7,7 @@ import { FilterDash } from "./components/filterDash";
 import { useCart, useFilterDash } from "../../context";
 import { handleError } from "../../components/";
 import { useNavigate } from "react-router-dom";
+import { AdminDashList } from "./components/AdminDashList";
 
 export const AdminDashboard = () => {
   const [filter, setShowFilter] = useState(false);
@@ -72,7 +73,7 @@ export const AdminDashboard = () => {
           </span>
         </div>
         {orders.length > 0 && productList.map((order) => (
-          <DashbaordList key={order.id} order={order} />
+          <AdminDashList key={order.id} order={order} />
         ))}
         {filter && <FilterDash setShow={setShowFilter} />}
       </section>}

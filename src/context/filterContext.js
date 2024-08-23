@@ -32,8 +32,6 @@ export const FilterProvider=({children})=>{
         return state.onlyInStock?products.filter(product=>product.in_stock===true):products;
     }
     function sort(products){
-        
-        console.log("Nono");
         if(state.sortBy==="lowtohigh"){
             return products.sort((a,b)=>Number(a.price)-Number(b.price));
         }

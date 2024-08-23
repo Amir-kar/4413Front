@@ -18,9 +18,14 @@ export const Login = () => {
       password:password.current.value
     }
     const data= await login(authDetail);
-    
+    if(data.accessToken){
+      navigate("/products");
+      toast.success("Successfully Logged in")
 
-    data.accessToken?navigate("/products"):toast.error(data);
+    }
+    else{
+      toast.error(data);
+    }
     
     
     

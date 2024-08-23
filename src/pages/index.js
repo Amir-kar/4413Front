@@ -4,8 +4,8 @@ export { OrderPage } from "./Order/OrderPage";
 
 export { CartPage } from "./Cart/CartPage";
 
-export { Login } from "./Login/Login";
-export { Register } from "./Register";
+export { Login } from "./LoginAndRegister/Login";
+export { Register } from "./LoginAndRegister/Register";
 
 export {Home} from "./Home/Home";
 export {Products} from "./Products/Products";

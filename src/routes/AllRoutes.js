@@ -2,8 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { CartPage, Dashboard, Home, Login, OrderPage, PageNotFound, Products, Register } from '../pages'
 import { ProductDetail } from '../pages/ProductDetails'
-import { Protected } from './Protected'
-import { AdminProtected } from './AdminProtected'
+import { Protected,AdminProtected, UserProtected } from './Protected'
 import { AdminDashboard } from '../pages/Dashboard/AdminDashboard'
 
 import { FilterProvider, FilterProviderDash } from '../context';
@@ -20,7 +19,7 @@ export const AllRoutes = () => {
         <Route path='/register' element={<Register/>}/>
         <Route path='/cart' element={<Protected><CartPage/></Protected>}/>
         <Route path='/order' element={<Protected><OrderPage/></Protected>}/>
-        <Route path='/dashboard' element={<Protected><Dashboard/></Protected>}/>
+        <Route path='/dashboard' element={<Protected><UserProtected><Dashboard/></UserProtected></Protected>}/>
         <Route path='/adminDashboard' element={<Protected><AdminProtected><FilterProviderDash><AdminDashboard/></FilterProviderDash></AdminProtected></Protected>}/>
         <Route path='*' element={<PageNotFound/>}/>
     </Routes>

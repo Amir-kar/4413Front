@@ -9,20 +9,14 @@ import { useCart } from "../../context/cartContext";
 
 export const Header = () => {
     const {cartList}=useCart();
-    const [darkMode,setDarkMode]=useState(JSON.parse(localStorage.getItem("darkMode"))||false);
     const [search,setSearch]=useState(false);
     const token=JSON.parse(sessionStorage.getItem("token"));
     const [dropdown,setDropdown]= useState(false);
 
     useEffect(()=>{
-        localStorage.setItem("darkMode", JSON.stringify(darkMode));
-        if(darkMode){
             document.documentElement.classList.add("dark");
-        }else{
-            document.documentElement.classList.remove("dark");
-
-        }
-    },[darkMode]);
+        
+    },[]);
     return (
         <header>
             <nav className="bg-white dark:bg-gray-900">
@@ -32,7 +26,6 @@ export const Header = () => {
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Damazon</span>
                     </Link>
                     <div className="flex items-center relative">
-                        <span onClick={()=> setDarkMode(!darkMode)} className="cursor-pointer text-xl text-gray-700 dark:text-white mr-5 bi bi-gear-wide-connected"></span>
                         <span onClick={()=>setSearch(!search)} className="cursor-pointer text-xl text-gray-700 dark:text-white mr-5 bi bi-search"></span>
                         <Link to="/cart" className="text-gray-700 dark:text-white mr-5">
                             <span className="text-2xl bi bi-cart-fill relative">
