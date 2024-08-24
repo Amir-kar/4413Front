@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ProductCard } from "../../../components/Element/ProductCard"
+import { ProductCard } from "../../../components"
 import { getList } from "../../../services";
 import { toast } from "react-toastify";
 export const FeaturedProduct = () => {

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import logo from "../../assets/images/logo192.png"
 import { useEffect, useState } from "react"
-import { Search } from "../Section/Search";
 import { DropdownLoggedOut } from "../Element/DropdownLoggedOut";
 import { DropdownLoggedIn } from "../Element/DropdownLoggedIn";
 import { useCart } from "../../context/cartContext";
@@ -9,7 +8,6 @@ import { useCart } from "../../context/cartContext";
 
 export const Header = () => {
     const {cartList}=useCart();
-    const [search,setSearch]=useState(false);
     const token=JSON.parse(sessionStorage.getItem("token"));
     const [dropdown,setDropdown]= useState(false);
 
@@ -26,7 +24,6 @@ export const Header = () => {
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Damazon</span>
                     </Link>
                     <div className="flex items-center relative">
-                        <span onClick={()=>setSearch(!search)} className="cursor-pointer text-xl text-gray-700 dark:text-white mr-5 bi bi-search"></span>
                         <Link to="/cart" className="text-gray-700 dark:text-white mr-5">
                             <span className="text-2xl bi bi-cart-fill relative">
                                 <span className="text-white text-sm absolute -top-1 left-2.5 bg-rose-500 px-1 rounded-full ">{cartList.length} </span>
@@ -38,7 +35,6 @@ export const Header = () => {
                     </div>
                 </div>
             </nav>
-            {search&&<Search setSearch={setSearch}/>}
             
         </header>
     )

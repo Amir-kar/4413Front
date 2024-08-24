@@ -10,10 +10,6 @@ export const cartReducer=(state,action)=>{
             
         case "CLEAR_CART":
             return{...state,cartList:payload.products,total:payload.total}
-
-            
-        // case "UPDATE_PRICE":
-        //     return
             
         default:
             throw new Error("No case Found");

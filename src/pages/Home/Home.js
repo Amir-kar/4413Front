@@ -7,7 +7,9 @@ import { useTitle } from '../../hooks/useTitle'
 
 
 export const Home = () => {
-  useTitle("Home")
+
+  //this function changes title bowser tab to its paramiters (ex Home)
+  useTitle("Home");
   return (
     <main>
       <Hero/>

@@ -1,4 +1,7 @@
+//these functions are for login, logout and register
 
+//send a POST request to login
+//a POST is used to be able to use the body 
 export async function login(authDetail){
     const response=await fetch("http://localhost:8000/login",{
       method:"POST",
@@ -10,13 +13,15 @@ export async function login(authDetail){
     const data=await response.json();
     console.log(data);
     
-    if(data.accessToken){
+    if(data.accessToken){//if successful write the information to sessionStorage
       sessionStorage.setItem("type",JSON.stringify(data.user.type));
       sessionStorage.setItem("token",JSON.stringify(data.accessToken));
       sessionStorage.setItem("cbid",JSON.stringify(data.user.id));
     }
     return data;
 }
+
+//send a POST request to register
 export async function register(authDetail){
     const response=await fetch("http://localhost:8000/register",{
       method:"POST",
@@ -24,7 +29,7 @@ export async function register(authDetail){
       body:JSON.stringify(authDetail)
     });
     const data=await response.json();
-    if(data.accessToken){
+    if(data.accessToken){//if successful write the information to sessionStorage
       sessionStorage.setItem("type",JSON.stringify(data.user.type));
       sessionStorage.setItem("token",JSON.stringify(data.accessToken));
       sessionStorage.setItem("cbid",JSON.stringify(data.user.id));
@@ -32,7 +37,10 @@ export async function register(authDetail){
     return data;
 
 }
+
+//used to logout. Removes all user information in session storage
 export function logout(){
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("type");
     sessionStorage.removeItem("cbid");
 }

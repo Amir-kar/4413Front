@@ -2,6 +2,11 @@ import { Footer, Header } from './components';
 import { AllRoutes } from './routes/AllRoutes';
 
 function App() {
+
+
+  //<Header />  Header
+  //<AllRoutes /> Main Body
+  //<Footer />  Footer
   return (
     <>
       
