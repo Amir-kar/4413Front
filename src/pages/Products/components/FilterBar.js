@@ -45,14 +45,14 @@ export const FilterBar = ({setShow}) => {
                     </div>
                   </li>
                   <li className="mt-1 mb-5">
-                    <span className="font-semibold">Other Filters</span>
+                    <span className="font-semibold">Filter</span>
                     <div className="flex items-center my-1">
-                        <input onChange={()=>dispatch({type:"BEST_SELLER_ONLY",payload:{bestSellerOnly:!state.bestSellerOnly}})} id="best-seller" checked={state.bestSellerOnly ||false} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
-                        <label htmlFor="best-seller" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Best Seller Only</label>
+                        <input onChange={()=>dispatch({type:"ONLY_PORTO",payload:{onlyPorto:"Porto"}})} id="onlyPatties" checked={state.onlyPorto==="Porto" ||false} type="radio" name="OneType" value="" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
+                        <label htmlFor="onlyPatties" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Only Porto Patties</label>
                     </div>
                     <div className="flex items-center my-1">
-                        <input onChange={()=>dispatch({type:"ONLY_IN_STOCK",payload:{onlyInStock:!state.onlyInStock}})} id="only-instock" checked={state.onlyInStock ||false} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
-                        <label htmlFor="only-instock" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">INSTOCK Only</label>
+                        <input onChange={()=>dispatch({type:"ONLY_PORTO",payload:{onlyPorto:"Leash"}})} id="onlyLeahes" checked={state.onlyPorto==="Leash" ||false} type="radio" name="OneType" value="" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
+                        <label htmlFor="onlyLeashes" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Only Leashes</label>
                     </div>
                   </li>
                   <li className="mt-1 mb-5 px-1">

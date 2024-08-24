@@ -22,11 +22,33 @@ export const FilterProviderDash=({children})=>{
             }
         })
     }
+    function ifPorto(product,type){
+        
+        console.log("ksjhdjkghsk");
+        for(let i=0;i<product.cartList.length;i++){
+            console.log("in array at: "+i);
+            console.log(product.cartList[i]);
+            if(product.cartList[i].best_seller===type){
+
+                return true;
+            }
+                
+        }
+        return false;
+    }
+
+    function onlyPorto(products){
+        if(state.onlyPorto==="Porto"){
+            return products.filter(product=>ifPorto(product,true));
+        }
+        if(state.onlyPorto==="Leash"){
+            return products.filter(products=>ifPorto(products,false));
+        }
+        return products;
+    }
 
     
     function sort(products){
-        console.log("works price");
-        console.log(state.sortBy);
         if(state.sortBy==="Plowtohigh"){
             
             return products.sort((a,b)=>Number(a.amount_paid)-Number(b.amount_paid));
@@ -38,7 +60,8 @@ export const FilterProviderDash=({children})=>{
         return products;
     }
     function userSortBy(products){
-        console.log("works ID");
+
+        console.log(products);
         if(state.sortBy==="Ilowtohigh"){
             return products.sort((a,b)=>Number(a.user.id)-Number(b.user.id));
         }
@@ -55,7 +78,7 @@ export const FilterProviderDash=({children})=>{
         return product.sort((a,b)=>Number(a.id)-Number(b.id));
     }
     
-    const filtererdProductList= sort(userSortBy(clearFilter(state.productList)));
+    const filtererdProductList= sort(userSortBy(onlyPorto(clearFilter(state.productList))));
     const value={
         state,
         dispatch,

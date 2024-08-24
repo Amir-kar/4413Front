@@ -1,4 +1,4 @@
-import { DropdownSVG } from "./DropdownSVG"
+import { DropdownSVG } from "../../../assets/svg/DropdownSVG"
 import { useState } from "react"
 import { ListProducts } from "./ListProducts";
 

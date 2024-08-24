@@ -8,6 +8,7 @@ import { useCart, useFilterDash } from "../../context";
 import { handleError } from "../../components/";
 import { useNavigate } from "react-router-dom";
 import { AdminDashList } from "./components/AdminDashList";
+import { FilterSVG } from "../../assets";
 
 export const AdminDashboard = () => {
   const [filter, setShowFilter] = useState(false);
@@ -68,7 +69,7 @@ export const AdminDashboard = () => {
         <div className="float-right">
           <span>
             <button onClick={() => setShowFilter(!filter)} id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700" type="button">
-              <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+              <FilterSVG/>  
             </button>
           </span>
         </div>

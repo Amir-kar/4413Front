@@ -6,7 +6,7 @@ import { useTitle } from "../../hooks/useTitle";
 
 
 export const Login = () => {
-  const email=useRef();
+  const name=useRef();
   const password=useRef();
   const navigate=useNavigate();
   useTitle("Login");
@@ -14,7 +14,7 @@ export const Login = () => {
   async function handleLogin(event){
     event.preventDefault();
     const authDetail={
-      email:email.current.value,
+      email:name.current.value,
       password:password.current.value
     }
     const data= await login(authDetail);
@@ -38,8 +38,8 @@ export const Login = () => {
         </section>        
           <form onSubmit={handleLogin}>
             <div className="mb-6">
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
-                <input ref={email}type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="shubham@example.com" required autoComplete="off" />
+                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your name</label>
+                <input ref={name}type="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="mail@mail.com" required autoComplete="off" />
             </div>
             <div className="mb-6">
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your password</label>

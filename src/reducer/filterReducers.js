@@ -9,18 +9,14 @@ export const filterReducer=(state,action)=>{
             return {...state,sortBy:payload.sortBy}
         case "RATINGS":
             return {...state,rating:payload.rating}
-
-        case "BEST_SELLER_ONLY":
-            return {...state,bestSellerOnly:payload.bestSellerOnly}
-        case "ONLY_IN_STOCK":
-            return {...state,onlyInStock:payload.onlyInStock}
+        case "ONLY_PORTO":
+            return {...state,onlyPorto:payload.onlyPorto}
         case "USER_SORT_BY":
             console.log("works ID2");
             return{...state,sortBy:payload.sortBy}
         case "CLEAR_FILTER":
             return {...state, 
-                onlyInStock:false,
-                bestSellerOnly:false,
+                onlyPorto:null,
                 sortBy:null,
                 userSortBy:null,
                 rating:null

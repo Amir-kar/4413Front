@@ -17,11 +17,11 @@ export const FilterDash = ({ setShow }) => {
                         <li className="mt-1 mb-5">
                             <p className="font-semibold my-1">Sort by Final Price</p>
                             <div className="flex items-center my-1">
-                                <input onChange={() => dispatch({ type: "SORT_BY", payload: { sortBy: "Plowtohigh" } })} checked={state.sortBy === "Plowtohigh"  || false} id="price-sort-1" type="radio" value="" name="sort" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
+                                <input onChange={() => dispatch({ type: "SORT_BY", payload: { sortBy: "Plowtohigh" } })} checked={state.sortBy === "Plowtohigh" || false} id="price-sort-1" type="radio" value="" name="sort" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
                                 <label htmlFor="price-sort-1" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price - Low to High</label>
                             </div>
                             <div className="flex items-center my-1">
-                                <input onChange={() => dispatch({ type: "SORT_BY", payload: { sortBy: "Phightolow" } })} checked={state.sortBy === "Phightolow"  || false} id="price-sort-2" type="radio" value="" name="sort" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
+                                <input onChange={() => dispatch({ type: "SORT_BY", payload: { sortBy: "Phightolow" } })} checked={state.sortBy === "Phightolow" || false} id="price-sort-2" type="radio" value="" name="sort" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
                                 <label htmlFor="price-sort-2" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price - High to Low</label>
                             </div>
                         </li>
@@ -39,12 +39,12 @@ export const FilterDash = ({ setShow }) => {
                         <li className="mt-1 mb-5">
                             <span className="font-semibold">Other Filters</span>
                             <div className="flex items-center my-1">
-                                <input onChange={() => dispatch({ type: "BEST_SELLER_ONLY", payload: { bestSellerOnly: !state.bestSellerOnly } })} id="best-seller" checked={state.bestSellerOnly || false} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
-                                <label htmlFor="best-seller" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Best Seller Only</label>
+                                <input onChange={() => dispatch({ type: "ONLY_PORTO", payload: { onlyPorto: "Porto" } })} id="onlyPatties" checked={state.onlyPorto === "Porto" || false} type="radio" name="OneType" value="" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
+                                <label htmlFor="onlyPatties" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Only Porto Patties</label>
                             </div>
                             <div className="flex items-center my-1">
-                                <input onChange={() => dispatch({ type: "ONLY_IN_STOCK", payload: { onlyInStock: !state.onlyInStock } })} id="only-instock" checked={state.onlyInStock || false} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
-                                <label htmlFor="only-instock" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">INSTOCK Only</label>
+                                <input onChange={() => dispatch({ type: "ONLY_PORTO", payload: { onlyPorto: "Leash" } })} id="onlyLeahes" checked={state.onlyPorto === "Leash" || false} type="radio" name="OneType" value="" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
+                                <label htmlFor="onlyLeashes" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Only Leashes</label>
                             </div>
                         </li>
                         <li className="mt-1 mb-5 px-1">

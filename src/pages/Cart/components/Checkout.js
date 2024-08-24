@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useCart } from "../../../context/cartContext"
 import { useNavigate } from "react-router-dom";
-import { createOrder, getUser, logout } from "../../../services";
+import { createOrder, getUser } from "../../../services";
 import { handleError } from "../../../components/errorHandle/handleError";
 import { toast } from "react-toastify";
+import { Location, Wallet } from "./checkComp";
+import { DropdownSVG } from "../../../assets";
 
 export const Checkout = ({ setCheckout }) => {
     const { cartList, total, clearCart } = useCart();
@@ -11,6 +13,8 @@ export const Checkout = ({ setCheckout }) => {
     const [user, setUser] = useState({});
     const [fakeUser, setFake] =useState({});
     const [ wallet,setWallet]=useState({});
+    const [ location,setLocation]=useState({});
+    const [viewState,setView]=useState(0);
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -21,9 +25,7 @@ export const Checkout = ({ setCheckout }) => {
                 setUser(data);
                 setFake(data);
                 setWallet(data.wallet);
-                console.log("yesafsdf");
             }catch(error){
-            //error.message.toUpperCase()
                 handleError(error);
                 clearCart();
                 navigate('/login');
@@ -49,11 +51,18 @@ export const Checkout = ({ setCheckout }) => {
             navigate("/order", { state: { status: false } });
         }
     }
-    function handleChangeValues({name=fakeUser.name,email=fakeUser.email,card=wallet?.card,month=wallet?.month,year=wallet?.month,cvv=wallet?.cvv}){
+    function handleChangeValues({
+        name=fakeUser.name,
+        card=wallet?.card,
+        month=wallet?.month,
+        year=wallet?.month,
+        cvv=wallet?.cvv,
+        address=location?.address,
+        city=location?.city,
+        country=location?.country}){
         const data={
             id:user.id,
             name:name,
-            email:email,
             type:user.type,
             password:user.password,
             wallet:{
@@ -61,10 +70,17 @@ export const Checkout = ({ setCheckout }) => {
                 month:month,
                 year:year,
                 cvv:cvv
+            },
+            location:{
+                address:address,
+                city:city,
+                country:country
             }
+
         }
         setFake(data);
         setWallet(data.wallet);
+        setLocation(data.location);
     }
     function handleChangeAllow(){
         setAllow(!allowChange);
@@ -72,6 +88,14 @@ export const Checkout = ({ setCheckout }) => {
             setFake(user);
         }
 
+    }
+    function changeView(formWhere){
+        if(formWhere===viewState){
+            setView(0);
+        }
+        else{
+            setView(formWhere);
+        }
     }
 
     return (
@@ -95,23 +119,17 @@ export const Checkout = ({ setCheckout }) => {
                                     <label htmlFor="name" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name:</label>
                                     <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={fakeUser.name || ""} onChange={e=>handleChangeValues({name:e.target.value})} readOnly={allowChange} required/>
                                 </div>
-                                <div>
-                                    <label htmlFor="email" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email:</label>
-                                    <input type="text" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={fakeUser.email || ""} onChange={e=>handleChangeValues({email:e.target.value})} readOnly={allowChange} required />
-                                </div>
-                                <div>
-                                    <label htmlFor="card" className="mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Card Number:</label>
-                                    <input type="number" name="card" id="card" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={wallet?.card || ''} readOnly={allowChange} onChange={e=>handleChangeValues({card:e.target.value})} required />
-                                </div>
-                                <div className="">
-                                    <label htmlFor="code" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Expiry Date:</label>
-                                    <input type="number" name="month" id="month" className="inline-block w-20 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={wallet?.month || ''} onChange={e=>handleChangeValues({month:e.target.value})} readOnly={allowChange} max="12" required />
-                                    <input type="number" name="year" id="year" className="inline-block w-20 ml-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={wallet?.year || ''} onChange={e=>handleChangeValues({year:e.target.value})}  readOnly={allowChange} required />
-                                </div>
-                                <div>
-                                    <label htmlFor="code" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >Security Code:</label>
-                                    <input type="number" name="code" id="code" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={wallet?.cvv || null} onChange={e=>handleChangeValues({cvv:e.target.value})}  readOnly={allowChange} required />
-                                </div>
+                                <button type="button" onClick={()=>changeView(1)} className="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    <div>My Wallet</div>
+                                    <div><DropdownSVG/></div>
+                                </button>
+                                {viewState===1&&<Wallet wallet={wallet} handleChangeValues={handleChangeValues} allowChange={allowChange}/>}
+                                
+                                <button type="button" onClick={()=>changeView(2)} className="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    <div>My Location</div>
+                                    <div><DropdownSVG/></div>
+                                </button>
+                                {viewState===2&&<Location location={location} handleChangeValues={handleChangeValues} allowChange={allowChange}/>}
                                 <div>
                                     <input id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={e=>handleChangeAllow()} />
                                     <label htmlFor="code" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >Modify User Information</label>                                

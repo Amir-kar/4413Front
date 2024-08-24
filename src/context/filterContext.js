@@ -3,8 +3,7 @@ import { filterReducer } from "../reducer";
 
 const filterInitialState={
     productList:[],
-    onlyInStock:false,
-    bestSellerOnly:false,
+    onlyPorto:null,
     sortBy:null,
     rating:null
 }
@@ -24,12 +23,14 @@ export const FilterProvider=({children})=>{
         })
     }
 
-    function bestSeller(products){
-
-        return state.bestSellerOnly?products.filter(product=>product.best_seller===true):products;
-    }
-    function inStock(products){
-        return state.onlyInStock?products.filter(product=>product.in_stock===true):products;
+    function onlyPorto(products){
+        if(state.onlyPorto==="Porto"){
+            return products.filter(products=>products.best_seller);
+        }
+        if(state.onlyPorto==="Leash"){
+            return products.filter(products=>!products.best_seller);
+        }
+        return products;
     }
     function sort(products){
         if(state.sortBy==="lowtohigh"){
@@ -61,7 +62,7 @@ export const FilterProvider=({children})=>{
             return products.sort((a,b)=>Number(a.id)-Number(b.id));
         }
     
-    const filtererdProductList= rating(sort(inStock(bestSeller(clearFilter(state.productList)))));
+    const filtererdProductList= rating(sort(onlyPorto(clearFilter(state.productList))));
     const value={
         state,
         dispatch,

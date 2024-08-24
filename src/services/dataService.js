@@ -41,8 +41,26 @@ export async function getUserOrders() {
   return data;
 
 }
+
+function locationCheck(location){
+  if(location.address===""&&location.city===""&&location.country===""){
+    throw{
+      message:"Billing Information Completely",
+      status:400
+    }
+  }
+}
 export async function createOrder(cartList, total, user, allowChange) {
+  try{
+    locationCheck(user.location);
+  }catch(error){
+    throw{
+      message:"Please Fill Billing Information Completely",
+      status:400
+    }
+  }
   const brData = getSession();
+
 
   if (!allowChange) {
     patch(user, brData);
@@ -53,7 +71,6 @@ export async function createOrder(cartList, total, user, allowChange) {
     quantity: cartList.length,
     user: {
       name: user.name,
-      email: user.email,
       id: user.id,
       wallet: {
         card: user.wallet.card,
@@ -64,15 +81,7 @@ export async function createOrder(cartList, total, user, allowChange) {
     }
   }
   console.log(user);
-  // try{
-
-  //   
-  // }catch(error){
-  //     throw{
-  //       status:400,
-  //       message:"Please fill the form completely"
-  //     }
-  //   }
+  
   const responce = await fetch("http://localhost:8000/660/orders", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${brData.token}` },
