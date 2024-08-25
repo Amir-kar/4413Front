@@ -2,11 +2,12 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { CartPage, Dashboard, Home, Login, OrderPage, PageNotFound, Products, Register } from '../pages'
 import { ProductDetail } from '../pages/ProductDetails'
-import { Protected,AdminProtected, UserProtected } from './Protected'
+import { Protected,AdminProtected, UserDashProtected, UserINFOProtected } from './Protected'
 import { AdminDashboard } from '../pages/Dashboard/AdminDashboard'
 
 import { FilterProvider, FilterProviderDash } from '../context';
 import { UserINFO } from '../pages'
+import { AdminINFO } from '../pages/UserINFO/AdminINFO'
 
 export const AllRoutes = () => {
 
@@ -26,10 +27,12 @@ export const AllRoutes = () => {
         <Route path='/register' element={<Register/>}/>
         <Route path='/cart' element={<Protected> <CartPage/> </Protected>}/>
         
-        <Route path='/userINFO' element={<Protected> <UserINFO/> </Protected>}/>
+        <Route path='/userINFO' element={<Protected> <UserINFOProtected> <UserINFO/> </UserINFOProtected> </Protected>}/>
+        <Route path='/adminINFO' element={<Protected><AdminProtected> <AdminINFO/> </AdminProtected></Protected>}/>
 
         <Route path='/order' element={<Protected> <OrderPage/> </Protected>}/>
-        <Route path='/dashboard' element={<Protected> <UserProtected><Dashboard/></UserProtected> </Protected>}/>
+        <Route path='/dashboard' element={<Protected> <UserDashProtected> <Dashboard/> </UserDashProtected> </Protected>}/>
+
         <Route path='/adminDashboard' element={<Protected> <AdminProtected><FilterProviderDash><AdminDashboard/></FilterProviderDash></AdminProtected> </Protected>}/>
         <Route path='*' element={<PageNotFound/>}/>
     </Routes>

@@ -1,7 +1,10 @@
 //function involving user information
 
+import { patch } from "./authService";
+import url from "../../assets/json/url.json";
+
 //gets session information from sessionStorage
-function getSession() {
+export function getSession() {
   const token = JSON.parse(sessionStorage.getItem("token"));
   const cbid = JSON.parse(sessionStorage.getItem("cbid"));
 
@@ -13,7 +16,7 @@ function getSession() {
 export async function getUser() {
   const brData = getSession();
 
-  const responce = await fetch(`http://localhost:8000/600/users/${brData.id}`, {
+  const responce = await fetch(`${url.url}600/users/${brData.id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${brData.token}` }
   });
@@ -37,7 +40,7 @@ export async function getUserOrders() {
 
   const brData = getSession();
 
-  const responce = await fetch(`http://localhost:8000/660/orders?user.id=${brData.id}`, {
+  const responce = await fetch(`${url.url}660/orders?user.id=${brData.id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${brData.token}` }
   });
@@ -86,7 +89,7 @@ export async function createOrder(cartList, total, user, tempData) {
 
 //if the user want to do change their billing information from check out 
   if (!tempData) {
-    patch(user, brData);
+    patch(user);
   }
 
 
@@ -107,7 +110,7 @@ export async function createOrder(cartList, total, user, tempData) {
     }
   }
   
-  const responce = await fetch("http://localhost:8000/660/orders", {
+  const responce = await fetch(`${url.url}660/orders`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${brData.token}` },
     body: JSON.stringify(order)
@@ -125,21 +128,4 @@ export async function createOrder(cartList, total, user, tempData) {
   return data;
 }
 
-//used if the user wants to update their information
-async function patch(user, brData) {
-  const responce = await fetch("http://localhost:8000/600/users/" + user.id, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${brData.token}` },
-    body: JSON.stringify(user)
-  });
-  const data = await responce.json();
 
-    //throw error if something went wrong
-  if (!responce.ok) {
-    console.log(data);
-    throw {
-      message: responce.statusText,
-      status: responce.status
-    }
-  }
-}

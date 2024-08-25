@@ -1,8 +1,10 @@
+import url from "../assets/json/url.json";
+
 //Differnet GET fetch requests involving getting products
 
 //GET all Products 
 export async function getList() {
-  const response = await fetch(`http://localhost:8000/444/products`);
+  const response = await fetch(`${url.url}444/products`);
 
   //if something went wrong throw error
   if(!response.ok){
@@ -18,7 +20,7 @@ export async function getList() {
 
 //Get certain product depending on its ID
 export async function getProduct(id) {
-  const response = await fetch(`http://localhost:8000/444/products/${id}`);
+  const response = await fetch(`${url.url}444/products/${id}`);
 
     //if something went wrong throw error
   if(!response.ok){

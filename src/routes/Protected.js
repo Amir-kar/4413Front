@@ -19,10 +19,18 @@ export const AdminProtected = ({children}) => {
 return token.toUpperCase()==="ADMIN"? children :<Navigate to="/"/>
 }
 
-//this is used to stop Admins from entering /dashboard but to the /adminDashboard
+//this is used to stop Admins from entering /dashboard and to redirect them to /adminDashboard
 //this is belived that to be an easier solution then to write a special condition in './../components/Element/DropdownLoggedIn.js'
 //to create a button for the sole purpose for admins to visit /adminDashboard
-export const UserProtected = ({children})=>{
+export const UserDashProtected = ({children})=>{
   const token=JSON.parse(sessionStorage.getItem("type"));
   return token.toUpperCase()==="USER"?children:<Navigate to="/adminDashboard"/>
+}
+
+//this is used to stop Admins from entering /userINFO and to redirect them to /adminDashboard
+//this is belived that to be an easier solution then to write a special condition in './../components/Element/DropdownLoggedIn.js'
+//to create a button for the sole purpose for admins to visit /adminDashboard
+export const UserINFOProtected = ({children})=>{
+  const token=JSON.parse(sessionStorage.getItem("type"));
+  return token.toUpperCase()==="USER"?children:<Navigate to="/adminINFO"/>
 }

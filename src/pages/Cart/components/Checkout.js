@@ -11,12 +11,9 @@ export const Checkout = ({ setCheckout }) => {
     const { cartList, total, clearCart } = useCart();
     const navigate = useNavigate();
 
-
     const [tempData, setTempData]=useState(false);
-    const [user, setUser] = useState({});
-    const [fakeUser, setFake] =useState({});
-    const [ wallet,setWallet]=useState({});
-    const [ location,setLocation]=useState({});
+    const [user, setUser] = useState({wallet:{},location:{}});
+    const [fakeUser, setFake] =useState({wallet:{},location:{}});
     const [viewState,setView]=useState(0);
 
     
@@ -27,7 +24,6 @@ export const Checkout = ({ setCheckout }) => {
                 const data=await getUser();
                 setUser(data);
                 setFake(data);
-                setWallet(data.wallet);
             }catch(error){
                 handleError(error);
                 clearCart();
@@ -56,13 +52,13 @@ export const Checkout = ({ setCheckout }) => {
     }
     function handleChangeValues({
         name=fakeUser.name,
-        card=wallet?.card,
-        month=wallet?.month,
-        year=wallet?.year,
-        cvv=wallet?.cvv,
-        address=location?.address,
-        city=location?.city,
-        country=location?.country}){
+        card=fakeUser?.wallet?.card,
+        month=fakeUser?.wallet?.month,
+        year=fakeUser?.wallet?.year,
+        cvv=fakeUser?.wallet?.cvv,
+        address=fakeUser?.location?.address,
+        city=fakeUser?.location?.city,
+        country=fakeUser?.location?.country}){
         const data={
             id:user.id,
             name:name,
@@ -83,8 +79,6 @@ export const Checkout = ({ setCheckout }) => {
         }
         setFake(data);
         setUser(data);
-        setWallet(data.wallet);
-        setLocation(data.location);
     }
     function changeView(formWhere){
         if(formWhere===viewState){
@@ -120,13 +114,13 @@ export const Checkout = ({ setCheckout }) => {
                                     <div>My Wallet</div>
                                     <div><DropdownSVG/></div>
                                 </button>
-                                {viewState===1&&<Wallet wallet={wallet} handleChangeValues={handleChangeValues}/>}
+                                {viewState===1&&<Wallet wallet={fakeUser?.wallet} handleChangeValues={handleChangeValues}/>}
                                 
                                 <button type="button" onClick={()=>changeView(2)} className="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                     <div>My Location</div>
                                     <div><DropdownSVG/></div>
                                 </button>
-                                {viewState===2&&<Location location={location} handleChangeValues={handleChangeValues}/>}
+                                {viewState===2&&<Location location={fakeUser?.location} handleChangeValues={handleChangeValues}/>}
                                 <div>
                                     <input id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={e=>setTempData(!tempData)} />
                                     <label htmlFor="code" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >Use Temporary Information</label>                                
