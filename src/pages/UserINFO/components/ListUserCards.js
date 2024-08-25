@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { DropdownSVG } from "../../../assets";
 import { UserCard } from "./UserCard";
 import { toast } from "react-toastify";
-import { patch } from "../../../services";
+import { patchAdmin } from "../../../services";
 
 export const ListUserCards=({user})=>{
     const [dropList,setDropList]=useState(false);
@@ -22,6 +22,7 @@ export const ListUserCards=({user})=>{
 
         const data = {
             id: user.id,
+            email:user.email,
             name: name,
             wallet: {
                 card: card,
@@ -32,10 +33,9 @@ export const ListUserCards=({user})=>{
         }
         setFakeUser(data);
     }
-    async function updateUser(event) {
-        event.preventDefault();
+    async function updateUser() {
         try{
-            await patch(fakeUser);
+            await patchAdmin(fakeUser);
             toast.success("User Inforation changed");
         }catch(error){
             toast.error(error.message);
@@ -45,7 +45,7 @@ export const ListUserCards=({user})=>{
         <div className="max-w-4xl m-auto p-2 mb-5 border dark:border-slate-700">
           <div className="flex justify-between text-sm m-2 font-bold dark:text-slate-200">
               <span>User Id: {fakeUser.id}</span>
-              <span>User Name: ${fakeUser.name}</span>
+              <span>User Name: {fakeUser.name}</span>
               <button onClick={()=>setDropList(!dropList)}><DropdownSVG/></button>
           </div>
           

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DashbaordEmpty } from "./components/DashboardEmpty";
 import { DashbaordList } from "./components/DashboardList";
-import { getUserOrders } from "../../services";
+import { deleteAdminOrder, deleteOrder, getAllUserOrders, getUserOrders } from "../../services";
 import { useTitle } from "../../hooks/useTitle";
 import { FilterDash } from "./components/filterDash";
 import { useCart, useFilterDash } from "../../context";
@@ -9,16 +9,17 @@ import { handleError } from "../../components/";
 import { useNavigate } from "react-router-dom";
 import { AdminDashList } from "./components/AdminDashList";
 import { FilterSVG } from "../../assets";
+import { toast } from "react-toastify";
 
 export const AdminDashboard = () => {
+  useTitle("Admin Dashboard");
   const [filter, setShowFilter] = useState(false);
   const [showAdmin, setShow] = useState(false);
   const [orders, setOrders] = useState([]);
-
   const { productList, initialProductList } = useFilterDash();
-  useTitle("Admin Dashboard");
   const { clearCart } = useCart();
   const  navigate  = useNavigate();
+
   useEffect(() => {
     async function getOrder() {
       try {
@@ -32,11 +33,32 @@ export const AdminDashboard = () => {
     }
     getOrder();
   }, []);
+
+  async function handleAdminDelete(orderID){
+    console.log(orderID);
+    try{
+      await deleteAdminOrder(orderID);
+      initialProductList(productList.filter(order=>order.id!==orderID));
+
+    }catch(error){
+      toast.error(error.message);
+    }
+  }
+
+  async function handleDelete(orderID){
+    try{
+      await deleteOrder(orderID);
+      setOrders(orders.filter(order=>order.id!==orderID));
+    }catch(error){
+      toast.error(error.message);
+    }
+  }
+
   function handleAdmin() {
     if (!productList.length) {
       async function getOrder() {
         try {
-          const data = await getUserOrders();
+          const data = await getAllUserOrders();
           initialProductList(data);
         } catch (error) {
           handleError(error);
@@ -47,7 +69,6 @@ export const AdminDashboard = () => {
       getOrder();
     }
     setShow(true);
-      console.log(productList);
   }
   return (
     <main>
@@ -61,7 +82,7 @@ export const AdminDashboard = () => {
       </section>
       {!showAdmin && <section>
         {orders.length > 0 && orders.map((order) => (
-          <DashbaordList key={order.id} order={order} />
+          <DashbaordList key={order.id} order={order} handleDelete={handleDelete}/>
         ))}
 
       </section>}
@@ -73,8 +94,8 @@ export const AdminDashboard = () => {
             </button>
           </span>
         </div>
-        {orders.length > 0 && productList.map((order) => (
-          <AdminDashList key={order.id} order={order} />
+        {productList.map((order) => (
+          <AdminDashList key={order.id} order={order} handleDelete={handleAdminDelete} />
         ))}
         {filter && <FilterDash setShow={setShowFilter} />}
       </section>}

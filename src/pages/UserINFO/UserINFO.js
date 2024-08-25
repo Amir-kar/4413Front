@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
 import { handleError } from "../../components";
 import { useNavigate } from "react-router-dom";
-import { getUser, patch } from "../../services";
+import { getUser, patch, patchUser } from "../../services";
 import { UserCard } from "./components/UserCard";
 import { toast } from "react-toastify";
+import { useTitle } from "../../hooks/useTitle";
 
 
 export const UserINFO = () => {
+    useTitle("User Information");
     const  navigate  = useNavigate();
 
     const [user, setUser] = useState({ wallet: {} });
@@ -47,10 +49,9 @@ export const UserINFO = () => {
         setUser(data);
     }
 
-    async function updateUser(event) {
-        event.preventDefault();
+    async function updateUser() {
         try{
-            await patch(user);
+            await patchUser(user);
             toast.success("User Inforation changed");
         }catch(error){
             toast.error(error.message);

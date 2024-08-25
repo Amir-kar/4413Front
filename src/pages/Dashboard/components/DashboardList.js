@@ -2,7 +2,7 @@ import { DropdownSVG } from "../../../assets/svg/DropdownSVG"
 import { useState } from "react"
 import { ListProducts } from "./ListProducts";
 
-export const DashbaordList = ({order}) => {
+export const DashbaordList = ({order,handleDelete}) => {
     const[dropList,setDropList]=useState(false);
     
     return (
@@ -14,7 +14,7 @@ export const DashbaordList = ({order}) => {
               <span>Total: ${order.amount_paid}</span>
               <button onClick={()=>setDropList(!dropList)}><DropdownSVG/></button>
           </div>
-          {dropList&&<ListProducts order={order}/>}
+          {dropList&&<ListProducts order={order} handleDelete={handleDelete}/>}
 
           
           

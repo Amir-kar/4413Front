@@ -1,6 +1,4 @@
 //function involving user information
-
-import { patch } from "./authService";
 import url from "../../assets/json/url.json";
 
 //gets session information from sessionStorage
@@ -32,6 +30,28 @@ export async function getUser() {
 
   const data = responce.json();
   return data;
+}
+
+//used if the user wants to update their information
+export async function patchUser(user) {
+  console.log(user);
+  
+  const brData = getSession();
+  const responce = await fetch(url.url+"600/users/" + user.id, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${brData.token}` },
+    body: JSON.stringify(user)
+  });
+  const data = await responce.json();
+
+    //throw error if something went wrong
+  if (!responce.ok) {
+    console.log(data);
+    throw {
+      message: responce.statusText,
+      status: responce.status
+    }
+  }
 }
 
 
@@ -89,7 +109,7 @@ export async function createOrder(cartList, total, user, tempData) {
 
 //if the user want to do change their billing information from check out 
   if (!tempData) {
-    patch(user);
+    patchUser(user);
   }
 
 
@@ -128,4 +148,18 @@ export async function createOrder(cartList, total, user, tempData) {
   return data;
 }
 
-
+export async function deleteOrder(orderID){
+  const brData=getSession();
+  const responce=await fetch(`${url.url}664/orders/${orderID}`,{
+    method:"DELETE",
+    headers: { Authorization: `Bearer ${brData.token}` }
+  });
+  const data=await responce.json();
+  console.log(data);
+  if(!responce.ok){
+    throw{
+      message:responce.statusText,
+      status:responce.status
+    }
+  }
+}

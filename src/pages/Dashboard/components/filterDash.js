@@ -40,11 +40,11 @@ export const FilterDash = ({ setShow }) => {
                             <span className="font-semibold">Other Filters</span>
                             <div className="flex items-center my-1">
                                 <input onChange={() => dispatch({ type: "ONLY_PORTO", payload: { onlyPorto: "Porto" } })} id="onlyPatties" checked={state.onlyPorto === "Porto" || false} type="radio" name="OneType" value="" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
-                                <label htmlFor="onlyPatties" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Only Porto Patties</label>
+                                <label htmlFor="onlyPatties" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Has Porto Patties</label>
                             </div>
                             <div className="flex items-center my-1">
                                 <input onChange={() => dispatch({ type: "ONLY_PORTO", payload: { onlyPorto: "Leash" } })} id="onlyLeahes" checked={state.onlyPorto === "Leash" || false} type="radio" name="OneType" value="" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
-                                <label htmlFor="onlyLeashes" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Only Leashes</label>
+                                <label htmlFor="onlyLeashes" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Has Leashes</label>
                             </div>
                         </li>
                         <li className="mt-1 mb-5 px-1">

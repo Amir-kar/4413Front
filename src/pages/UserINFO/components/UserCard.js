@@ -16,7 +16,7 @@ export const UserCard=({handleChange,updateUser,user})=>{
                                 <form onSubmit={updateUser} className="space-y-6" >
                                     <div>
                                         <label htmlFor="name" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name:</label>
-                                        <input type="text" name="name" id="name" className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white  ${change ? "" : "cursor-not-allowed"}`} onChange={e=>handleChange({name:e.target.value})} value={user.name || ""} disabled={change ? "" : "disabled"} />
+                                        <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white  cursor-not-allowed" value={user.name || ""} disabled="disabled" />
                                     </div>
                                     {<Wallet wallet={user.wallet} change={change} handleChange={handleChange} />}
 
@@ -24,7 +24,7 @@ export const UserCard=({handleChange,updateUser,user})=>{
                                         <input id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={() => setChange(!change)} />
                                         <label htmlFor="code" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >Modify User Information</label>
                                     </div>
-                                    <button type="submit" className={`w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 ${change ? "" : "cursor-not-allowed"}`} disabled={change ? "" : "disabled"} >
+                                    <button type="button" className={`w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 ${change ? "" : "cursor-not-allowed"}`} disabled={change ? "" : "disabled"} onClick={()=>updateUser()}>
                                         Change Information
                                     </button>
                                 </form>
