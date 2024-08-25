@@ -9,14 +9,17 @@ import { DropdownSVG } from "../../../assets";
 
 export const Checkout = ({ setCheckout }) => {
     const { cartList, total, clearCart } = useCart();
-    const [allowChange, setAllow]=useState(true);
+    const navigate = useNavigate();
+
+
+    const [tempData, setTempData]=useState(false);
     const [user, setUser] = useState({});
     const [fakeUser, setFake] =useState({});
     const [ wallet,setWallet]=useState({});
     const [ location,setLocation]=useState({});
     const [viewState,setView]=useState(0);
 
-    const navigate = useNavigate();
+    
     useEffect(() => {
                
         async function fetchData() {
@@ -37,10 +40,10 @@ export const Checkout = ({ setCheckout }) => {
         event.preventDefault();
 
         try {
-            if(!allowChange){
+            if(tempData){
                 setUser(fakeUser);
             }
-            const data=await createOrder(cartList,total,user,allowChange);
+            const data=await createOrder(cartList,total,user,tempData);
             clearCart();
             navigate("/order", { state: { data: data, status: true } });
         } catch (error) {
@@ -55,7 +58,7 @@ export const Checkout = ({ setCheckout }) => {
         name=fakeUser.name,
         card=wallet?.card,
         month=wallet?.month,
-        year=wallet?.month,
+        year=wallet?.year,
         cvv=wallet?.cvv,
         address=location?.address,
         city=location?.city,
@@ -79,15 +82,9 @@ export const Checkout = ({ setCheckout }) => {
 
         }
         setFake(data);
+        setUser(data);
         setWallet(data.wallet);
         setLocation(data.location);
-    }
-    function handleChangeAllow(){
-        setAllow(!allowChange);
-        if(!allowChange){
-            setFake(user);
-        }
-
     }
     function changeView(formWhere){
         if(formWhere===viewState){
@@ -117,22 +114,22 @@ export const Checkout = ({ setCheckout }) => {
                             <form onSubmit={handleOrder} className="space-y-6" >
                                 <div>
                                     <label htmlFor="name" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name:</label>
-                                    <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={fakeUser.name || ""} onChange={e=>handleChangeValues({name:e.target.value})} readOnly={allowChange} required/>
+                                    <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={fakeUser.name || ""} onChange={e=>handleChangeValues({name:e.target.value})} required/>
                                 </div>
                                 <button type="button" onClick={()=>changeView(1)} className="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                     <div>My Wallet</div>
                                     <div><DropdownSVG/></div>
                                 </button>
-                                {viewState===1&&<Wallet wallet={wallet} handleChangeValues={handleChangeValues} allowChange={allowChange}/>}
+                                {viewState===1&&<Wallet wallet={wallet} handleChangeValues={handleChangeValues}/>}
                                 
                                 <button type="button" onClick={()=>changeView(2)} className="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                     <div>My Location</div>
                                     <div><DropdownSVG/></div>
                                 </button>
-                                {viewState===2&&<Location location={location} handleChangeValues={handleChangeValues} allowChange={allowChange}/>}
+                                {viewState===2&&<Location location={location} handleChangeValues={handleChangeValues}/>}
                                 <div>
-                                    <input id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={e=>handleChangeAllow()} />
-                                    <label htmlFor="code" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >Modify User Information</label>                                
+                                    <input id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={e=>setTempData(!tempData)} />
+                                    <label htmlFor="code" className=" mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >Use Temporary Information</label>                                
                                 </div>
                                 <p className="mb-4 text-2xl font-semibold text-lime-500 text-center">
                                     ${total}

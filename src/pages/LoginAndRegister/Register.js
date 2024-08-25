@@ -10,6 +10,7 @@ export const Register = () => {
     event.preventDefault();
     console.log(event.target.name.value+" fshjfjdshfjsdkjfhdk");
     const authDetail={
+      email:event.target.name.value,
       name:event.target.name.value,
       password:event.target.password.value,
       type:"user",

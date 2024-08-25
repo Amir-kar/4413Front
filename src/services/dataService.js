@@ -57,6 +57,7 @@ export async function getUserOrders() {
 //used in createOrder to verify if the location bill was filled out
 function locationCheck(location){
   if(location.address===""||location.city===""||location.country===""){
+    
     //if there are any empty string throw error. 
     throw{
       message:"Billing Information Completely",
@@ -66,8 +67,9 @@ function locationCheck(location){
 }
 
 //used to create an order by user
-export async function createOrder(cartList, total, user, allowChange) {
+export async function createOrder(cartList, total, user, tempData) {
   try{
+    console.log(user.location);
     locationCheck(user.location);
   }catch(error){
     
@@ -83,7 +85,7 @@ export async function createOrder(cartList, total, user, allowChange) {
   const brData = getSession();
 
 //if the user want to do change their billing information from check out 
-  if (!allowChange) {
+  if (!tempData) {
     patch(user, brData);
   }
 
@@ -118,7 +120,8 @@ export async function createOrder(cartList, total, user, allowChange) {
       status: responce.status
     };
   }
-  const data = await responce.json();
+  
+  const data = user;
   return data;
 }
 

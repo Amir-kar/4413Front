@@ -6,6 +6,7 @@ import { Protected,AdminProtected, UserProtected } from './Protected'
 import { AdminDashboard } from '../pages/Dashboard/AdminDashboard'
 
 import { FilterProvider, FilterProviderDash } from '../context';
+import { UserINFO } from '../pages'
 
 export const AllRoutes = () => {
 
@@ -24,6 +25,9 @@ export const AllRoutes = () => {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/cart' element={<Protected> <CartPage/> </Protected>}/>
+        
+        <Route path='/userINFO' element={<Protected> <UserINFO/> </Protected>}/>
+
         <Route path='/order' element={<Protected> <OrderPage/> </Protected>}/>
         <Route path='/dashboard' element={<Protected> <UserProtected><Dashboard/></UserProtected> </Protected>}/>
         <Route path='/adminDashboard' element={<Protected> <AdminProtected><FilterProviderDash><AdminDashboard/></FilterProviderDash></AdminProtected> </Protected>}/>
