@@ -1,6 +1,6 @@
 # In Order to Run the Project you need to have npm installed 
 
-To Run the Project use git clone to download the porject.
+To Run the Project use git clone to download the project.
 
 After open command prompt and type cd "Location of project" to change the directory to the project folder
 
