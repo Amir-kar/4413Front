@@ -4,7 +4,7 @@ import { useCart } from "../../context/cartContext";
 import { useEffect, useState } from "react";
 
 export const ProductCard = ({ product }) => {
-    const { id, name, overview, poster, price, rating, best_seller } = product;
+    const { id, name, description, poster, price, rating, best_seller } = product;
     const { cartList, addToCart, removeFromCart } = useCart();
     const [inCart, setInCart] = useState(false);
 
@@ -18,6 +18,23 @@ export const ProductCard = ({ product }) => {
         }
     }, [cartList, product.id]);
 
+    function truncate (text, limit, append) {
+        var parts = text.split(' ');
+        if (parts.length > limit) {
+            // loop backward through the string
+            for (var i = parts.length - 1; i > -1; --i) {
+                // if i is over limit, drop this word from the array
+                if (i+1 > limit) {
+                    parts.length = i;
+                }
+            }
+            // add the truncate append text
+            parts.push(append);
+        }
+        // join the array back into a string
+        return parts.join(' ');
+    }
+
     return (
         <div className="m-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             <Link to={`/products/${id}`} className="relative" >
@@ -28,7 +45,7 @@ export const ProductCard = ({ product }) => {
                 <Link to={`/products/${id}`}>
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{name}</h5>
                 </Link>
-                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{overview}</p>
+                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{truncate(description,15,"...")}</p>
 
                 <div className="flex items-center my-2">
                     <Rating rating={rating} />
