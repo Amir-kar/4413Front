@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# In Order to Run the Project you need to have npm installed 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To Run the Project use git clone to download the project.
+
+After open command prompt and type cd "Location of project" to change the directory to the project folder
+
+Next type 'npm install' this will installs the required dependencies
+
+Finaly type 'npm start' to start the project in developer mode
+
+Below is the default README.md created by react if you wish to read it 
 
 ## Available Scripts
 
