@@ -10,6 +10,11 @@ export const CartProvider = ({ children }) => {
     const [state,dispatch]=useReducer(cartReducer,cartInitialState);
 
     function addToCart(product){
+        // const item={
+        //     id:product.id,name:product.name,description:product.description,price:product.price,quantity:1}
+        // }
+        
+        console.log(product);
         const updatedList=state.cartList.concat(product);
         const updatedTotal=state.total + product.price;
         dispatch({

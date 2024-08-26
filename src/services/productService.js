@@ -14,6 +14,11 @@ export async function getList() {
     };
   }
   const data = await response.json();
+  console.log(typeof data);
+  for (let i=1;i<data.length;i++){
+    data[i]["quality"]=1;
+  }
+  
   return data;
 
 }
