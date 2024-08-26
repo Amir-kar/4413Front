@@ -42,7 +42,7 @@
       "poster": "https://4413projectdamazon.s3.amazonaws.com/photos/dog3.jpg",
       "rating": 5,
       "productAmount": 7,
-      "isPorto": true
+      "isPorto": false
     },
     {
       "id": 10005,
@@ -86,7 +86,7 @@
       "poster": "https://4413projectdamazon.s3.amazonaws.com/photos/dog7.jpg",
       "rating": 5,
       "productAmount": 3,
-      "isPorto": true
+      "isPorto": false
     },
     {
       "id": 10009,
@@ -130,7 +130,7 @@
       "poster": "https://4413projectdamazon.s3.amazonaws.com/photos/potty2.png",
       "rating": 5,
       "productAmount": 1,
-      "isPorto": false
+      "isPorto": true
     },
     {
       "id": 10013,
@@ -141,7 +141,7 @@
       "poster": "https://4413projectdamazon.s3.amazonaws.com/photos/potty3.png",
       "rating": 4,
       "productAmount": 3,
-      "isPorto": false
+      "isPorto": true
     },
     {
       "id": 10014,
@@ -152,7 +152,7 @@
       "poster": "https://4413projectdamazon.s3.amazonaws.com/photos/potty4.png",
       "rating": 4,
       "productAmount": 3,
-      "isPorto": false
+      "isPorto": true
     },
     {
       "id": 10015,
@@ -163,7 +163,7 @@
       "poster": "https://4413projectdamazon.s3.amazonaws.com/photos/potty5.png",
       "rating": 2,
       "productAmount": 1,
-      "isPorto": false
+      "isPorto": true
     }
   ],
   "orders": [
