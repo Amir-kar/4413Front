@@ -1040,6 +1040,19 @@
         "city": "sdfdfs",
         "country": "sdfsdfsd"
       }
+    },
+    {
+      "email": "a1@a1.c",
+      "password": "$2a$10$nYnMueUZF5.11mh.v6OfOe.SKsa.Xm56vISIR6JCQjUutgwkLGNnK",
+      "name": "a1@a1.c",
+      "type": "admin",
+      "wallet": {
+        "card": "",
+        "month": "",
+        "year": "",
+        "cvv": ""
+      },
+      "id": 10
     }
   ]
 }
