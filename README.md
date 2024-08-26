@@ -17,8 +17,11 @@ json-server data/db.json -m ./node_modules/json-server-auth -r data/route.json -
 you may use the front as you wish
 
 the username and password for admin user are bellow:
+
 username: a1@a1.c
+
 password: a1@a1.c
+
 them being the same is intentional.
 
 
