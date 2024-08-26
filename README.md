@@ -2,11 +2,25 @@
 
 To Run the Project use git clone to download the project.
 
-After open command prompt and type cd "Location of project" to change the directory to the project folder
+After open command prompt and type cd "Location of project" to change the directory to the project folder (../4413Front/)
 
 Next type 'npm install' this will installs the required dependencies
 
-Finaly type 'npm start' to start the project in developer mode
+Finaly type 'npm start' to start the project in developer mode (DO NOT CLOSE THE COMMAND PROMPT THIS WILL CLOSE THE SERVER)
+
+This project also come with a simple backend to use
+
+To Start it first open a seccond command prompt in the same directory as the first one (../4413Front/) and type
+
+json-server data/db.json -m ./node_modules/json-server-auth -r data/route.json --port 8000
+
+you may use the front as you wish
+
+the username and password for admin user are bellow:
+username: a1@a1.c
+password: a1@a1.c
+them being the same is intentional.
+
 
 Below is the default README.md created by react if you wish to read it 
 
