@@ -28,7 +28,7 @@ export const FilterProviderDash=({children})=>{
         for(let i=0;i<product.cartList.length;i++){
             console.log("in array at: "+i);
             console.log(product.cartList[i]);
-            if(product.cartList[i].best_seller===type){
+            if(product.cartList[i].isPorto===type){
 
                 return true;
             }

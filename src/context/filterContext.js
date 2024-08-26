@@ -25,10 +25,10 @@ export const FilterProvider=({children})=>{
 
     function onlyPorto(products){
         if(state.onlyPorto==="Porto"){
-            return products.filter(products=>products.best_seller);
+            return products.filter(products=>products.isPorto);
         }
         if(state.onlyPorto==="Leash"){
-            return products.filter(products=>!products.best_seller);
+            return products.filter(products=>!products.isPorto);
         }
         return products;
     }

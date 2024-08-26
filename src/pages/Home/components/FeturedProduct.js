@@ -11,8 +11,8 @@ export const FeaturedProduct = () => {
     async function fetchProducts() {
       try {
         const data = await getList();
-        const foodSplice=data.filter(data=>data.best_seller);
-        const dogSplice=data.filter(data=>!data.best_seller);
+        const foodSplice=data.filter(data=>data.isPorto);
+        const dogSplice=data.filter(data=>!data.isPorto);
         foodSplice.splice(3);
         dogSplice.splice(3);
         setFood(foodSplice);

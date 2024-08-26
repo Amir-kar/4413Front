@@ -23,8 +23,8 @@ export const ListProducts=({order,handleDelete})=>{
                         </div>
                     </div>
                 </div>
-                {product.best_seller && <span className="float-right font-semibold text-amber-500 border bg-amber-50 rounded-lg px-3 py-1 mr-2 h-9 ">BEST SELLER</span>}
-                {!product.best_seller && <span className="float-right font-semibold text-amber-500 border bg-amber-50 rounded-lg px-3 py-1 mr-2 h-9 ">not BEST SELLER</span>}
+                {product.isPorto && <span className="float-right font-semibold text-amber-500 border bg-amber-50 rounded-lg px-3 py-1 mr-2 h-9 ">BEST SELLER</span>}
+                {!product.isPorto && <span className="float-right font-semibold text-amber-500 border bg-amber-50 rounded-lg px-3 py-1 mr-2 h-9 ">not BEST SELLER</span>}
             
             </div>
           ))}
