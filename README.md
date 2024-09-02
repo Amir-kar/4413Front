@@ -1,22 +1,25 @@
 # In Order to Run the Project you need to have npm installed 
 
+To install npm simply download node.js(https://nodejs.org/en) and the installer should do the rest
+
 To Run the Project use git clone to download the project.
 
-After open command prompt and type cd "Location of project" to change the directory to the project folder (../4413Front/)
+To Run the Project follow these steps
 
-Next type 'npm install' this will installs the required dependencies
+1. Open command prompt and type cd "Location of project" to change the directory to the project folder (../4413Front/)
+2. Next type 'npm install' this will installs the required dependencies
+3. Open a new command prompt in the same location (../4413Front/) and type ->
+   npm install -g json-server@0.17.4
+4. Then in the second command prompt type ->
+   json-server data/db.json -m ./node_modules/json-server-auth -r data/route.json --port 8000
+4.5 This is a simple backend that allows the front-end to have functionality 
+5. Now go to the original command prompt from step 1 and then type ->
+   npm start
+6. The website should have started, warning Do Not Close any of Command Prompts unless you with to stop react or the json-server 
 
-Finaly type 'npm start' to start the project in developer mode (DO NOT CLOSE THE COMMAND PROMPT THIS WILL CLOSE THE SERVER)
+You may use the front end as you wish
 
-This project also come with a simple backend to use
-
-To Start it first open a seccond command prompt in the same directory as the first one (../4413Front/) and type
-
-json-server data/db.json -m ./node_modules/json-server-auth -r data/route.json --port 8000
-
-you may use the front as you wish
-
-the username and password for admin user are bellow:
+The username and password for admin user are bellow:
 
 username: a1@a1.c
 
